@@ -138,11 +138,19 @@
         <div class="result">
             <h3>Prediction Result:</h3>
             <p><span class="label">Age:</span> {{ age }}</p>
-            <p><span class="label">Gender:</span> {% if gender == 1 %} Male {% else %} Female {% endif %}</p>
-            <p><span class="label">Stream:</span> {% if stream == 0 %} Civil {% elif stream == 1 %} Computer Science {% elif stream == 2 %} Electrical {% elif stream == 3 %} Electronics And Communication {% elif stream == 4 %} Information Technology {% else %} Mechanical {% endif %}</p>
-            <p><span class="label">Internships:</span> {% if internships == 1 %} Yes {% else %} No {% endif %}</p>
+            <p><span class="label">Gender:</span> {% if gender == '1' %} Male {% else %} Female {% endif %}</p>
+            <p><span class="label">Stream:</span> 
+                {% if stream == '0' %} Civil 
+                {% elif stream == '1' %} Computer Science
+                {% elif stream == '2' %} Electrical
+                {% elif stream == '3' %} Electronics And Communication
+                {% elif stream == '4' %} Information Technology
+                {% elif stream == '5' %} Mechanical
+                {% endif %}
+            </p>
+            <p><span class="label">Internships:</span> {% if internships == '1' %} Yes {% else %} No {% endif %}</p>
             <p><span class="label">CGPA:</span> {{ CGPA }}</p>
-            <p><span class="label">History of Backlogs:</span> {% if historyOfBacklogs == 1 %} Yes {% else %} No {% endif %}</p>
+            <p><span class="label">History of Backlogs:</span> {% if historyOfBacklogs == '1' %} Yes {% else %} No {% endif %}</p>
             <h4>{{ prediction_text }}</h4>
         </div>
         {% endif %}

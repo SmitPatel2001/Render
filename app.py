@@ -15,15 +15,23 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    
     # extrect data from form
     age = request.form['age']
+    print(age)
     gender = request.form['gender']
+    print(gender)
     stream = request.form['stream']
+    print(stream)
     internships = request.form['internships']
+    print(internships)
     CGPA = request.form['CGPA']
+    print(CGPA)
     historyOfBacklogs = request.form['historyOfBacklogs']
+    print(historyOfBacklogs)
 
     int_features = [int(x) for x in request.form.values()]
+    print("int_features :", int_features)
     final_features = [np.array(int_features)]
 
     # make prediction
