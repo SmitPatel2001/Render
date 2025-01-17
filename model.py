@@ -30,27 +30,27 @@ print(data)
 print(data.info())
 print(data['Stream'].unique())
 
-# x = data.drop(['Status'], axis=1)
-# y = data['Status']
+x = data.drop(['Status'], axis=1)
+y = data['Status']
 
-# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
-# param_grid = {
-#     'n_estimators': [50, 100],
-#     'max_depth': [ 10, 20],
-#     'min_samples_split': [2, 5],
-#     'min_samples_leaf': [1, 2]
-#     }
+param_grid = {
+    'n_estimators': [50, 100],
+    'max_depth': [ 10, 20],
+    'min_samples_split': [2, 5],
+    'min_samples_leaf': [1, 2]
+    }
 
-# rf = RandomForestClassifier(random_state=42)
-# grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=3, n_jobs=-1, verbose=2)
-# grid_search.fit(x_train, y_train)
+rf = RandomForestClassifier(random_state=42)
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=3, n_jobs=-1, verbose=2)
+grid_search.fit(x_train, y_train)
 
-# best_rf = grid_search.best_estimator_
+best_rf = grid_search.best_estimator_
 
-# y_pred = best_rf.predict(x_test)
-# print("Accuracy: ", accuracy_score(y_test, y_pred))
-# print("Classification Report: ", classification_report(y_test, y_pred))
+y_pred = best_rf.predict(x_test)
+print("Accuracy: ", accuracy_score(y_test, y_pred))
+print("Classification Report: ", classification_report(y_test, y_pred))
 
-# with open("model.pkl", "wb") as file:
-#     pickle.dump(best_rf, file)  
+with open("model.pkl", "wb") as file:
+    pickle.dump(best_rf, file)  
