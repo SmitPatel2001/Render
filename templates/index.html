@@ -86,13 +86,15 @@
             <!-- Gender Dropdown (Male = 1, Female = 0) -->
             <label for="gender">Gender:</label>
             <select name="gender" required>
+                <option value="" disabled selected>select gender</option> <!-- Placeholder option -->
                 <option value="1">Male</option>
                 <option value="0">Female</option>
             </select>
 
             <!-- Stream Dropdown (Numeric Values) -->
             <label for="stream">Stream:</label>
-            <select name="stream" required>
+            <select name="stream"  required>
+                <option value="" disabled selected>select stream</option> <!-- Placeholder option -->
                 <option value="0">Civil</option>
                 <option value="1">Computer Science</option>
                 <option value="2">Electrical</option>
@@ -104,6 +106,7 @@
             <!-- Internships Boolean -->
             <label for="internships">Internships:</label>
             <select name="internships" required>
+                <option value="" disabled selected>select internships</option> <!-- Placeholder option -->
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -111,8 +114,9 @@
             </select>
 
             <!-- CGPA Input -->
-            <label for="CGPA">CGPA (1 to 10):</label>
-            <select name="CGPA" required>
+            <label for="CGPA">CGPA :</label>
+            <select name="CGPA" id="CGPA"  required>
+                <option value="" disabled selected>enter cgpa</option> <!-- Placeholder option -->
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -128,6 +132,7 @@
             <!-- History of Backlogs Boolean -->
             <label for="historyOfBacklogs">History of Backlogs:</label>
             <select name="historyOfBacklogs" required>
+                <option value="" disabled selected>select history of backlogs</option> <!-- Placeholder option -->
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
