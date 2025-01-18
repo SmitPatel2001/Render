@@ -150,7 +150,13 @@
                 {% elif stream == '5' %} Mechanical
                 {% endif %}
             </p>
-            <p><span class="label">Internships:</span> {% if internships == '1' %} Yes {% else %} No {% endif %}</p>
+            <p><span class="label">Internships:</span> 
+                {% if internships == '0' %} 0 
+                {% elif internships == '1' %} 1
+                {% elif internships == '2' %} 2 
+                {% elif internships == '3' %} 3 
+                {% endif %}
+            </p>
             <p><span class="label">CGPA:</span> {{ CGPA }}</p>
             <p><span class="label">History of Backlogs:</span> {% if historyOfBacklogs == '1' %} Yes {% else %} No {% endif %}</p>
             <h4>{{ prediction_text }}</h4>
