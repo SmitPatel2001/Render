@@ -4,74 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Placement Prediction</title>
+    <!-- Link to Google Fonts (Roboto) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Link to Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Link to FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
     <style>
-        body {
+       body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #fc253e);
+            background: linear-gradient(45deg, #6a11cb, #fc253e, #ff9f00, #2d4db0);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
             color: #fff;
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
+
+        /* Gradient animation for background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Form container styling */
         .form-container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 100px auto;
-            padding: 30px;
-            background-color: #fff;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
             color: #333;
-            border-radius: 15px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            /* No scrolling */
+            height: auto; /* Automatically adjust to content */
         }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
+
+        /* Form labels */
         .form-container label {
-            font-size: 1.1em;
+            font-size: 1.2rem;
             margin-bottom: 8px;
             display: block;
         }
+
+        /* Form input and select styling */
         .form-container input, .form-container select {
             width: 100%;
-            padding: 12px;
+            padding: 16px 18px; /* Increased padding for proper content fit */
             margin: 10px 0;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 1em;
-            transition: all 0.3s ease;
+            font-size: 1rem;  /* Adjusted font size */
+            line-height: 1.5; /* Ensures content fits properly */
+            transition: all 0.3s ease-in-out;
+            background-color: #f1f1f1;
+            box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+            height: 55px; /* Increased height to prevent clipping */
         }
+
+        /* Ensure text is aligned properly */
+        .form-container input::placeholder, .form-container select {
+            text-align: left; /* Ensures placeholder text and selected options align properly */
+        }
+
+        /* Focus effect for input and select fields */
+        .form-container input:focus, .form-container select:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+        }
+
+        /* Submit button styling */
         .form-container input[type="submit"] {
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
-            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
+
+        /* Button hover effect */
         .form-container input[type="submit"]:hover {
             background-color: #45a049;
             transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        .form-container input:focus, .form-container select:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        .form-container input[type="number"], .form-container select {
-            background-color: #f9f9f9;
-        }
+
+        /* Custom styles for result section */
         .result {
-            font-size: 1.5em;
+            font-size: 1.5rem;
             color: #4CAF50;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
+
         .result .label {
             font-weight: bold;
         }
+
         .result p {
-            font-size: 1.2em;
+            font-size: 1.2rem;
             margin: 10px 0;
         }
+
+        /* Tooltip hints for inputs */
+        .form-container .tooltip {
+            display: inline-block;
+            position: relative;
+        }
+
+        .form-container .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+
     </style>
 </head>
 <body>
@@ -81,20 +148,20 @@
         <form action="/predict" method="post">
             <!-- Age Input -->
             <label for="age">Age:</label>
-            <input type="number" name="age" required>
-            
-            <!-- Gender Dropdown (Male = 1, Female = 0) -->
+            <input type="number" name="age" class="form-control" required>
+
+            <!-- Gender Dropdown -->
             <label for="gender">Gender:</label>
-            <select name="gender" required>
-                <option value="" disabled selected>select gender</option> <!-- Placeholder option -->
+            <select name="gender" class="form-control" required>
+                <option value="" disabled selected>select gender</option>
                 <option value="1">Male</option>
                 <option value="0">Female</option>
             </select>
 
-            <!-- Stream Dropdown (Numeric Values) -->
+            <!-- Stream Dropdown -->
             <label for="stream">Stream:</label>
-            <select name="stream"  required>
-                <option value="" disabled selected>select stream</option> <!-- Placeholder option -->
+            <select name="stream" class="form-control" required>
+                <option value="" disabled selected>select stream</option>
                 <option value="0">Civil</option>
                 <option value="1">Computer Science</option>
                 <option value="2">Electrical</option>
@@ -103,20 +170,20 @@
                 <option value="5">Mechanical</option>
             </select>
 
-            <!-- Internships Boolean -->
+            <!-- Internships Dropdown -->
             <label for="internships">Internships:</label>
-            <select name="internships" required>
-                <option value="" disabled selected>select internships</option> <!-- Placeholder option -->
+            <select name="internships" class="form-control" required>
+                <option value="" disabled selected>select internships</option>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
 
-            <!-- CGPA Input -->
+            <!-- CGPA Dropdown -->
             <label for="CGPA">CGPA :</label>
-            <select name="CGPA" id="CGPA"  required>
-                <option value="" disabled selected>enter cgpa</option> <!-- Placeholder option -->
+            <select name="CGPA" class="form-control" required>
+                <option value="" disabled selected>enter cgpa</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -129,10 +196,10 @@
                 <option value="10">10</option>
             </select>
 
-            <!-- History of Backlogs Boolean -->
+            <!-- History of Backlogs -->
             <label for="historyOfBacklogs">History of Backlogs:</label>
-            <select name="historyOfBacklogs" required>
-                <option value="" disabled selected>select history of backlogs</option> <!-- Placeholder option -->
+            <select name="historyOfBacklogs" class="form-control" required>
+                <option value="" disabled selected>select history of backlogs</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
@@ -168,6 +235,11 @@
         </div>
         {% endif %}
     </div>
+
+    <!-- Link to Bootstrap JS (Optional, for interactivity) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
